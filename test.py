@@ -30,7 +30,8 @@ from tkinter import filedialog, messagebox, ttk
 import shutil
 import requests
 from queue import Queue
-
+# from file_encryptor import FileEncryptor
+# from gui_encryption_integration import integrate_encryption_with_shndms, integrate_encryption_with_file_transfer
 # Initialize colorama for color output
 colorama.init()
 

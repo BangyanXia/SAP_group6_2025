@@ -1,0 +1,5 @@
+pyshark>=0.4.3
+scapy>=2.4.5
+netifaces>=0.11.0
+colorama>=0.4.4
+requests>=2.25.1

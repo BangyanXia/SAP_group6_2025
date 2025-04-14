@@ -1,0 +1,13 @@
+2025-04-14 00:42:38,221 [WARNING] Snort is not installed. Skipping rule creation.
+2025-04-14 00:42:38,244 [WARNING] Snort is not installed. Skipping Snort start.
+2025-04-14 00:42:38,244 [INFO] Starting network monitoring on interface wlan0
+2025-04-14 00:42:38,244 [INFO] Started network monitoring thread
+2025-04-14 00:42:38,245 [INFO] Starting alert monitoring thread
+2025-04-14 00:42:38,245 [INFO] Started alert processing thread
+2025-04-14 00:42:38,245 [INFO] Started web interface on port 8080
+2025-04-14 00:42:38,253 [INFO] Starting web interface on port 8080
+2025-04-14 00:42:38,276 [ERROR] Error in monitoring thread: Interface 'wlan0' not found !
+2025-04-14 00:42:38,305 [INFO] Enabled SYN cookies
+2025-04-14 14:21:25,291 [INFO] Keyboard interrupt received. Exiting...
+2025-04-14 14:21:25,293 [INFO] Stopping threads...
+2025-04-14 14:21:26,294 [INFO] Exiting Smart Home Network Detection & Management System

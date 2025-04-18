@@ -34,6 +34,7 @@ from queue import Queue
 # from gui_encryption_integration import integrate_encryption_with_shndms, integrate_encryption_with_file_transfer
 # Initialize colorama for color output
 colorama.init()
+alert_log = []
 
 # Global configuration
 CONFIG = {
@@ -188,10 +189,10 @@ class Defender:
         """Block an IP using iptables for a specified duration (seconds)"""
         try:
             # Check if IP is already blocked
-            check_cmd = f"sudo iptables -C INPUT -s {ip_address} -j DROP"
+            check_cmd = f"sudo iptables -C OUTPUT -s {ip_address} -j DROP"
             if subprocess.call(check_cmd, shell=True, stderr=subprocess.DEVNULL) != 0:
                 # IP is not blocked, add the rule
-                block_cmd = f"sudo iptables -I INPUT -s {ip_address} -j DROP"
+                block_cmd = f"sudo iptables -I OUTPUT -s {ip_address} -j DROP"
                 subprocess.call(block_cmd, shell=True)
                 logger.info(f"Blocked IP {ip_address} for {duration} seconds")
 
@@ -207,7 +208,7 @@ class Defender:
     def unblock_ip(ip_address):
         """Remove IP block from iptables"""
         try:
-            unblock_cmd = f"sudo iptables -D INPUT -s {ip_address} -j DROP"
+            unblock_cmd = f"sudo iptables -D OUTPUT -s {ip_address} -j DROP"
             subprocess.call(unblock_cmd, shell=True)
             logger.info(f"Unblocked IP {ip_address}")
             return True
@@ -314,7 +315,11 @@ class AlertThread(threading.Thread):
 
         logger.warning(
             f"{Fore.RED}ALERT: {alert_type.upper()} attack detected from {source} ({count} packets){Style.RESET_ALL}")
-
+        alert_log.append({
+            "type": alert_type,
+            "source": source,
+            "time": datetime.now().strftime("%H:%M:%S")
+        })
         # Take defensive action based on alert type
         if alert_type == "syn_flood":
             Defender.enable_syn_cookies()
@@ -833,11 +838,16 @@ class GUIApp:
         self.status_label.config(text=status_text)
 
         # Add any detected attacks to alert list
-        for attack_type, detected in attack_detected.items():
-            if detected:
-                current_time = datetime.now().strftime("%H:%M:%S")
-                self.alert_list.insert("", 0, values=(attack_type, "Unknown", current_time))
-                attack_detected[attack_type] = False  # Reset so we don't duplicate
+        
+        if hasattr(self, 'last_alert_index'):
+            start_idx = self.last_alert_index
+        else:
+            start_idx = 0
+
+        for alert in alert_log[start_idx:]:
+            self.alert_list.insert("", 0, values=(alert["type"], alert["source"], alert["time"]))
+
+        self.last_alert_index = len(alert_log)
 
         # Schedule next update
         self.root.after(1000, self.update_status)

@@ -1,0 +1,24 @@
+2025-04-16 14:24:27,401 [WARNING] Snort is not installed. Skipping rule creation.
+2025-04-16 14:24:27,403 [WARNING] Snort is not installed. Skipping Snort start.
+2025-04-16 14:24:27,403 [INFO] Starting network monitoring on interface wlan0
+2025-04-16 14:24:27,403 [INFO] Started network monitoring thread
+2025-04-16 14:24:27,404 [INFO] Starting alert monitoring thread
+2025-04-16 14:24:27,404 [INFO] Started alert processing thread
+2025-04-16 14:24:27,407 [INFO] Started web interface on port 8080
+2025-04-16 14:24:27,409 [INFO] Starting web interface on port 8080
+2025-04-16 14:24:27,435 [INFO] Enabled SYN cookies
+2025-04-16 14:24:45,522 [INFO] Shutdown signal received
+2025-04-16 14:24:46,523 [INFO] Stopping threads...
+2025-04-16 14:24:47,524 [INFO] Exiting Smart Home Network Detection & Management System
+2025-04-16 14:31:09,692 [WARNING] Snort is not installed. Skipping rule creation.
+2025-04-16 14:31:09,694 [WARNING] Snort is not installed. Skipping Snort start.
+2025-04-16 14:31:09,694 [INFO] Starting network monitoring on interface wlan0
+2025-04-16 14:31:09,695 [INFO] Started network monitoring thread
+2025-04-16 14:31:09,698 [INFO] Starting alert monitoring thread
+2025-04-16 14:31:09,700 [INFO] Started alert processing thread
+2025-04-16 14:31:09,703 [INFO] Started web interface on port 8080
+2025-04-16 14:31:09,704 [INFO] Starting web interface on port 8080
+2025-04-16 14:31:09,725 [INFO] Enabled SYN cookies
+2025-04-16 14:31:21,080 [INFO] Shutdown signal received
+2025-04-16 14:31:22,081 [INFO] Stopping threads...
+2025-04-16 14:31:23,082 [INFO] Exiting Smart Home Network Detection & Management System

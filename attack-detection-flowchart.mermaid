@@ -2,12 +2,9 @@
 flowchart LR
     Start([Network Traffic]) --> Monitor[Packet Monitoring]
     
-    Monitor --> CheckSYN{SYN Packets  
-> Threshold?}
-    Monitor --> CheckICMP{ICMP Packets  
-> Threshold?}
-    Monitor --> CheckConn{Half-open  
-Connections\n> Threshold?}
+    Monitor --> CheckSYN{SYN Packets > Threshold?}
+    Monitor --> CheckICMP{ICMP Packets > Threshold?}
+    Monitor --> CheckConn{Half-open Connections\n> Threshold?}
     
     CheckSYN -->|Yes| SYNFlood[SYN Flood Detected]
     CheckSYN -->|No| Continue1[Continue Monitoring]

@@ -1,9 +1,10 @@
-flowchart TD
+%%{init: {'themeVariables': {'edgeLabelBackground':'#fff'}, 'themeConfig': {'fontSize':'14px'}}%%
+flowchart LR
     Start([Network Traffic]) --> Monitor[Packet Monitoring]
     
-    Monitor --> CheckSYN{SYN Packets > Threshold?}
-    Monitor --> CheckICMP{ICMP Packets > Threshold?}
-    Monitor --> CheckConn{Half-open Connections > Threshold?}
+    Monitor --> CheckSYN{SYN Packets\n> Threshold?}
+    Monitor --> CheckICMP{ICMP Packets\n> Threshold?}
+    Monitor --> CheckConn{Half-open\nConnections\n> Threshold?}
     
     CheckSYN -->|Yes| SYNFlood[SYN Flood Detected]
     CheckSYN -->|No| Continue1[Continue Monitoring]
@@ -14,9 +15,15 @@ flowchart TD
     CheckConn -->|Yes| Slowloris[Slowloris Attack Detected]
     CheckConn -->|No| Continue3[Continue Monitoring]
     
-    SYNFlood --> SYNAction[Enable SYN Cookies\nBlock Source IP]
-    ICMPFlood --> ICMPAction[Block Source IP\nRate Limit ICMP]
-    Slowloris --> SlowAction[Limit Connections\nBlock Source IP]
+    SYNFlood --> SYNAction["`**Mitigation:**
+    - Enable SYN Cookies
+    - Block Source IP`"]
+    ICMPFlood --> ICMPAction["`**Mitigation:**
+    - Block Source IP
+    - Rate Limit ICMP`"]
+    Slowloris --> SlowAction["`**Mitigation:**
+    - Limit Connections
+    - Block Source IP`"]
     
     SYNAction --> NotifyUser[Notify User]
     ICMPAction --> NotifyUser

@@ -1,10 +1,10 @@
-flowchart TD
+%%{init: {'themeVariables': {'edgeLabelBackground':'#fff'}, 'themeConfig': {'fontSize':'18px'}}%%
+flowchart LR
     Start([Network Traffic]) --> Monitor[Packet Monitoring]
     
     Monitor --> CheckSYN{SYN Packets > Threshold?}
     Monitor --> CheckICMP{ICMP Packets > Threshold?}
-    Monitor --> CheckARP{ARP Packets > Threshold?}
-    Monitor --> CheckConn{Half-open Connections > Threshold?}
+    Monitor --> CheckConn{Half-open Connections\n> Threshold?}
     
     CheckSYN -->|Yes| SYNFlood[SYN Flood Detected]
     CheckSYN -->|No| Continue1[Continue Monitoring]
@@ -12,20 +12,21 @@ flowchart TD
     CheckICMP -->|Yes| ICMPFlood[ICMP Flood Detected]
     CheckICMP -->|No| Continue2[Continue Monitoring]
     
-    CheckARP -->|Yes| ARPSpoof[ARP Spoofing Detected]
-    CheckARP -->|No| Continue3[Continue Monitoring]
-    
     CheckConn -->|Yes| Slowloris[Slowloris Attack Detected]
-    CheckConn -->|No| Continue4[Continue Monitoring]
+    CheckConn -->|No| Continue3[Continue Monitoring]
     
-    SYNFlood --> SYNAction[Enable SYN Cookies\nBlock Source IP]
-    ICMPFlood --> ICMPAction[Block Source IP\nRate Limit ICMP]
-    ARPSpoof --> ARPAction[Send Alert\nVerify ARP Tables]
-    Slowloris --> SlowAction[Limit Connections\nBlock Source IP]
+    SYNFlood --> SYNAction["`**Mitigation:**
+    - Enable SYN Cookies
+    - Block Source IP`"]
+    ICMPFlood --> ICMPAction["`**Mitigation:**
+    - Block Source IP
+    - Rate Limit ICMP`"]
+    Slowloris --> SlowAction["`**Mitigation:**
+    - Limit Connections
+    - Block Source IP`"]
     
     SYNAction --> NotifyUser[Notify User]
     ICMPAction --> NotifyUser
-    ARPAction --> NotifyUser
     SlowAction --> NotifyUser
     
     NotifyUser --> GUI[Display in GUI]
@@ -35,9 +36,7 @@ flowchart TD
     style Start fill:#f96,stroke:#333,stroke-width:2px
     style SYNFlood fill:#f66,stroke:#333,stroke-width:2px
     style ICMPFlood fill:#f66,stroke:#333,stroke-width:2px
-    style ARPSpoof fill:#f66,stroke:#333,stroke-width:2px
     style Slowloris fill:#f66,stroke:#333,stroke-width:2px
     style SYNAction fill:#6f6,stroke:#333,stroke-width:2px
     style ICMPAction fill:#6f6,stroke:#333,stroke-width:2px
-    style ARPAction fill:#6f6,stroke:#333,stroke-width:2px
     style SlowAction fill:#6f6,stroke:#333,stroke-width:2px
